@@ -1,0 +1,90 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX Module</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-… " crossorigin="anonymous">
+    Google Fonts: Poppins
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .custom-btn {
+            background-color: #FF6F61; /* Bright Coral */
+            border-color: #FF6F61; /* Match the border to the background */
+            color: white; /* Ensure text is white for contrast */
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Simple Request Example</h1>
+        <button type="button" class="btn custom-btn" 
+        hx-get="/users"  hx-swap="#users"  hx-confirm="Do you want to proceed with fetching users?"   hx-vals='{"limit":4}'   hx-indicator="#loading" >
+            Fetch Some Stuff
+        </button>
+
+        <div id="loading" class="htmx-indicator spinner-border"
+        role="status">
+         </div>
+    </div>
+
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-…" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-…"
+        crossorigin="anonymous"></script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX Module</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-… " crossorigin="anonymous">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .custom-btn {
+            background-color: #FF6F61; /* Bright Coral */
+            border-color: #FF6F61; /* Match the border to the background */
+            color: white; /* Ensure text is white for contrast */
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        body {
+            background-color: #FFE8E1; /* Soft Peach */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Simple Request Example</h1>
+        <button type="button" class="btn custom-btn" 
+        hx-get="/users"  hx-swap="#users"  hx-confirm="Do you want to proceed with fetching users?"   hx-vals='{"limit":4}'   hx-indicator="#loading" >
+            Fetch Some Stuff
+        </button>
+
+        <div id="loading" class="htmx-indicator spinner-border"
+        role="status">
+         </div>
+    </div>
+
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-…" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-…"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
