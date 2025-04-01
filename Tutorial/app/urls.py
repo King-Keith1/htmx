@@ -1,5 +1,5 @@
 """
-URL configuration for tutorial project.
+URL configuration for app project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -14,11 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path, include
-from sim.views import sample_post, example  # Import your views
+from django.urls import path
+from tut.views import sample_post, example  # Import your views
 
 urlpatterns = [
     path('', example, name='home'),
     path('submit/', sample_post, name='sample-post'),  # Add a name
-    path('', include('sim.urls')),
 ]

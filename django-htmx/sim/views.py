@@ -1,20 +1,62 @@
-from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.shortcuts import render, get_object_or_404
+from django.views.decorators.http import require_http_methods
 from sim.forms import SampleForm
-
+from sim.models import Message
 
 def sample_post(request, *args, **kwargs):
     form = SampleForm(request.POST or None)
-
     if form.is_valid():
-        # form.cleaned_data now contains the validated data
-        print(f'{ form.cleaned_data= }')
-        return HttpResponse('<p class="success">Form submitted successfully! ✅</p>')
+        message = Message(
+            email=form.cleaned_data['email'],
+            name=form.cleaned_data['name'],
+            favourite_color=form.cleaned_data['favourite_color']
+        )
+        message.save()
+        messages = Message.objects.all()  # Fetch updated list of messages
+        return render(request, 'message_list.html', {'messages': messages})
     else:
-        # form.errors contains the form validation errors
-        return HttpResponse(f'<p class="error">Your form submission was unsuccessful ❌. Please would you correct the errors? The current errors: {form.errors}</p>')
-
+        error_message = '<p class="error">Your form submission was unsuccessful ❌. Please correct the errors:</p>'
+        error_message += '<ul>'
+        for field, errors in form.errors.items():
+            for error in errors:
+                error_message += f'<li>{field}: {error}</li>'
+        error_message += '</ul>'
+        return HttpResponse(error_message)
 
 def example(request):
-    return render(request, 'example.html')
+    messages = Message.objects.all()  # Fetch all messages
+    return render(request, 'example.html', {'messages': messages})
+
+def edit_message(request, message_id):
+    message = get_object_or_404(Message, id=message_id)
+    form = SampleForm(initial={
+        'email': message.email,
+        'name': message.name,
+        'favourite_color': message.favourite_color
+    })
+    return render(request, 'edit_form.html', {'form': form, 'message': message})
+
+def update_message(request, message_id):
+    message = get_object_or_404(Message, id=message_id)
+    form = SampleForm(request.POST or None)
+    if form.is_valid():
+        message.email = form.cleaned_data['email']
+        message.name = form.cleaned_data['name']
+        message.favourite_color = form.cleaned_data['favourite_color']
+        message.save()
+        return render(request, 'message_card.html', {'message': message})
+    else:
+        error_message = '<p class="error">Update failed ❌. Please correct the errors:</p>'
+        error_message += '<ul>'
+        for field, errors in form.errors.items():
+            for error in errors:
+                error_message += f'<li>{field}: {error}</li>'
+        error_message += '</ul>'
+        return HttpResponse(error_message)
+
+@require_http_methods(["DELETE"])
+def delete_message(request, message_id):
+    message = get_object_or_404(Message, id=message_id)
+    message.delete()
+    return HttpResponse("")  # Return an empty response to remove the element

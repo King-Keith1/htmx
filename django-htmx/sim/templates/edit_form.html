@@ -1,0 +1,21 @@
+<div class="card mb-2" id="message-{{ message.id }}" style="width: 18rem;">
+    <div class="card-body">
+        <form hx-post="{% url 'update-message' message.id %}" hx-target="#message-{{ message.id }}" hx-swap="outerHTML">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email" value="{{ form.email.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ form.name.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="favourite_color" class="form-label">Favourite Color</label>
+                <input type="text" class="form-control" id="favourite_color" name="favourite_color" value="{{ form.favourite_color.value|default_if_none:'' }}">
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-secondary" hx-get="{% url 'edit-message' message.id %}" hx-target="#message-{{ message.id }}" hx-swap="outerHTML">Cancel</button>
+        </form>
+    </div>
+</div>
